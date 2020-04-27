@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="margin-left:40%; margin-top:10%">
+{% if is_login == True %}
+    <div>
+        Добавить товар в заказ № {{ purchase.id }}
+    </div>
+    <br>
+    <br>
+
+    {% for product in products %}
+        <div>
+            {{ product.name }}
+        </div>
+    <form method="post" action="http://127.0.0.1:8000/login/">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_add" value="True">
+                    <input type="hidden" name="id_product" value="{{ product.id }}">
+                    <input type="hidden" name="id_purchase" value="{{ purchase.id }}">
+        <div>
+            Размер:
+        </div>
+                    <input type="number" name="count" value="1">
+                    <button class="button" type="submit">Добавить в заказ
+                        </button>
+                </form>
+    <br>
+
+
+    {% endfor %}
+
+    </div>
+
+{% endblock %}

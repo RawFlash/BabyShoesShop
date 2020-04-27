@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div style="margin-left:40%; margin-top:10%">
+
+        <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {% if is_image == False %}
+            <input type="hidden" name = 'is_name' value="True">
+            {{ form }}
+              {% endif %}
+            {% if is_image == True %}
+            <input type="hidden" name = 'is_image' value="True">
+            {{ form2 }}
+              {% endif %}
+
+        </table>
+        <input type="submit" value="Сохранить" />
+    </form>
+    <!--
+    <form method="post" action="http://127.0.0.1:8000/login/add_product" enctype="multipart/form-data">
+                    {% csrf_token %}
+        <h2>Добавить новый продукт в каталог</h2>
+                    <input type="hidden" name="add_product" value="True">
+        Название:
+
+                    <input type="text" name="title" value="Название">
+        <br>
+        Описание:
+                    <input type="text" name="description" value="Описание">
+        <br>
+        Цена:
+                    <input type="number" name="price" value="0">
+        <br>
+        Изображение:
+                    <input type="image" name="image">
+        <br>
+                    <button class="button" type="submit">Добавить в каталог
+                        </button>
+                </form>
+                -->
+    </div>
+
+{% endblock %}

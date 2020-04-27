@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="margin-left:40%; margin-top:5%">
+        <form method="post"   action="../end_buy" >
+                        {% csrf_token %}
+            <input type="hidden" name="go_to_main" value="True">
+            <h1>Оформление заказа прошло успешно</h1>
+            <h2>Номер вашего заказа: {{ zakaz }}</h2>
+            <input type="submit" value="Вернуться на сайт">
+            </form>
+    </div>
+{% endblock %}

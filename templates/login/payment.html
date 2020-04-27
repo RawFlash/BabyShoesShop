@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="margin-left:40%; margin-top:5%">
+        <form method="post"   action="../end_buy" >
+            {% csrf_token %}
+
+            <input type="hidden" name="zakaz" value="{{ zakaz }}">
+            <div>Номер банковской карты<input type="text" ></div>
+            <br>
+            <div>CVC-код:<input type="password" ></div>
+            <br>
+            <br>
+            <input type="submit" value="Оплатить">
+            </form>
+    </div>
+{% endblock %}

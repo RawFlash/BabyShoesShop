@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+    .form_in_centr {
+        top: 40%;
+        left: 40%;
+        position: absolute;}
+    .element {
+        margin: 5px;
+
+    }
+    .registr{
+        margin: 15px;
+    }
+    </style>
+    <div class="container">
+        <div class="row">
+                <div  align="center">
+
+                    <form  class="form_in_centr" method="post" action="" >
+
+                        {% csrf_token %}
+                        <a>Логин</a>
+                        <input class="element" name="login" type="text">
+                        <br>
+                        <a>Пароль</a>
+                        <input class="element" name="password" type="password">
+                        <br>
+                        <button class="button" type="submit">Войти
+                        </button>
+                        <br>
+
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

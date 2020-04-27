@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .corpushead{
+  text-align: center;
+}
+.corpus{
+  display: none;
+  text-align: center;
+}
+</style>
+
+<div style="margin-left:5%; margin-top:5%">
+
+    <div style="float:left;">
+        {% for purchase in purchases %}
+
+        <button class="corpushead" id="head-{{ purchase.id }}">
+        Номер заказа:
+                {{ purchase.id }}
+            <br>
+            Имя покупателя:
+            {{ purchase.name }}
+            <br>
+            Адресс покупателя:
+            {{ purchase.address }}
+            </button>
+        <br>
+            <div>
+            Доставлен: {% if purchase.check == True %}
+            Да
+                {% endif %}
+            {% if purchase.check == False %}
+            Нет
+                {% endif %}
+            </div>
+        <div style="margin-bottom:20px">
+            Способ оплаты: {% if purchase.cash == True %}
+            Наличный расчет
+                {% endif %}
+            {% if purchase.cash == False %}
+            Безналичный расчет
+                {% endif %}
+                <br>
+            </div>
+        {% endfor %}
+
+    </div>
+    <div  style="float:left; margin-left:20%">
+    {% for purchase in purchases %}
+
+            <div class="corpus" id="corpus-{{ purchase.id }}" >
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_check" value="True">
+                    <input type="hidden" name="id_purchase" value="{{ purchase.id }}">
+                    <button class="button" type="submit">Изменить статус заказа
+                        </button>
+                </form>
+                <form method="post" action="add">
+                    {% csrf_token %}
+                    <input type="hidden" name="add" value="True">
+                    <input type="hidden" name="id_purchase" value="{{ purchase.id }}">
+                    <button class="button" type="submit">Добавить товар в заказ
+                        </button>
+                </form>
+                {% for product_pur in product_in_purchases %}
+                    {% for product in products %}
+                {% if product_pur.id_purchase == purchase.id %}
+                    {% if product_pur.id_product == product.id %}
+
+                               <div>
+
+                                   Название товара:
+                        {{ product.name }}
+                </div>
+                <div>
+                Размер: {{ product_pur.count }}
+                    </div>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    <input type="hidden" name="is_delete" value="True">
+                    <input type="hidden" name="id_product_in_purchase" value="{{ product_pur.id }}">
+                <button class="button" type="submit">Удалить
+                        </button>
+                                   </form>
+                <br>
+
+                            {% endif %}
+                        {% endif %}
+
+                    {% endfor %}
+
+                {% endfor %}
+            </div>
+
+    {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

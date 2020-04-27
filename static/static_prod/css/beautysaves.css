@@ -1,0 +1,40 @@
+html, body{
+    height: 100%;
+    max-height: 100%;
+    font-family: 'Charm', cursive;
+}
+
+.top-container{
+    padding-top: 10%;
+}
+
+.general-container{
+    background: url('../img/a1.jpg');
+    height: 100%;
+}
+
+.general-container form{
+    margin-top: 30px;
+}
+
+.general-container form label{
+    font-weight: 300;
+    color: gray;
+}
+
+.btn-orange{
+    background-color: blacke;
+    border: none;
+}
+
+.btn-orange:hover{
+    background-color:black;
+    border: none;
+}
+
+.title{
+    text-align: center;
+    color: gray;
+    font-weight: 500;
+    line-height: 50px;
+}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                {% for image_item in product.productimage_set.all %}
+                    <div class="product-image-item">
+                        <img src="{{ image_item.image.url }}" class="img-responsive">
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="col-lg-6">
+                <h1 class="text-center">
+                    {{ product.name }}
+                </h1>
+                <div class="">
+                    <p>
+                        Price: {{ product.price }}
+                    </p>
+                </div>
+                <div>
+                      <!-- Nav tabs -->
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a href="#description" aria-controls="home" role="tab" data-toggle="tab">
+                                Описание
+                            </a>
+                        </li>
+{#                        <li role="presentation">#}
+{#                            <a href="#delivery" aria-controls="profile" role="tab" data-toggle="tab">#}
+{#                                Доставка#}
+{#                            </a>#}
+{#                        </li>#}
+{#                        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a></li>#}
+{#                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>#}
+                      </ul>
+
+                      <!-- Tab panes -->
+                      <div class="tab-content product-description-tabs">
+                        <div role="tabpanel" class="tab-pane active" id="description">
+                            {{ product.description }}
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="delivery">
+                            <h3>Как мы делаем доставку</h3>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="messages">...</div>
+                        <div role="tabpanel" class="tab-pane" id="settings">...</div>
+                      </div>
+                </div>
+
+                    <form method="post"   action="/basket_adding">
+                        {% csrf_token %}
+                        Выберите размер:
+                        <input type="number" class="form-control" name="number" id="number">
+
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+
+                        <input type="submit" id="submit_btn" class="btn btn-danger" value="Добавить">
+
+
+                        <!--class="form-inline"-->
+
+                        <!--
+                                <form action="" >
+                                    <input type="submit"  id="submit_btn" class="btn btn-danger"
+                                    data-product_id = "{{ product.id }}"
+                                    data-name ="{{ product.name }}"
+                                    data-price ="{{ product.price }}" value="Мой фаворит">
+                                </form>
+                           -->
+
+
+
+                    </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div style="margin-left:40%; margin-top:5%">
+        {% for product in products %}
+                {{ product.product.name }} {{ product.nmb }} размер
+                {{ product.product.price }} руб.
+                <br>
+        <br>
+        {% endfor %}
+
+        <br>
+        <br>
+        <div>Всего:
+            {{ products_total_nmb }} товаров
+        </div>
+        <br>
+        <br>
+        <form method="post"   action="../buy" >
+            {% csrf_token %}
+            <input type="hidden" name="buy" value="True">
+            <div>Имя:<input name="name"  type="text" value="Имя"></div>
+            <br>
+            <div>Адресс:<input name="address"  type="text" value="Адресс"></div>
+            <br>
+            <br>
+            <div>Способ оплаты:
+                <br>
+                     <input type="radio" name="pay" value="cash">Наличный расчет
+         <br>
+         <input type="radio" name="pay" value="online">Безналичный расчет
+                </div>
+            <br>
+            <input type="submit" value="Купить">
+
+            </form>
+    </div>
+{% endblock %}
